@@ -1237,7 +1237,7 @@
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
- * Override with M203
+ * Override with M203 
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 #define DEFAULT_MAX_FEEDRATE          { 8000, 8000, 8000, 15000 }
