@@ -895,7 +895,7 @@
 // @section delta
 
 // Enable for DELTA kinematics and configure below
-//#define DELTA
+#define DELTA
 #if ENABLED(DELTA)
 
   // Make delta curves from many straight lines (linear interpolation).
@@ -934,7 +934,7 @@
   #define DELTA_DIAGONAL_ROD 250.0        // (mm)
 
   // Distance between bed and nozzle Z home position
-  #define DELTA_HEIGHT 250.00             // (mm) Get this value from G33 auto calibrate
+  #define DELTA_HEIGHT 200.00             // (mm) Get this value from G33 auto calibrate
 
   #define DELTA_ENDSTOP_ADJ { 0.0, 0.0, 0.0 } // Get these values from G33 auto calibrate
 
@@ -1097,7 +1097,7 @@
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 //#define USE_XMIN_PLUG
 //#define USE_YMIN_PLUG
-#define USE_ZMIN_PLUG
+//#define USE_ZMIN_PLUG
 //#define USE_IMIN_PLUG
 //#define USE_JMIN_PLUG
 //#define USE_KMIN_PLUG
@@ -1106,7 +1106,7 @@
 //#define USE_WMIN_PLUG
 #define USE_XMAX_PLUG
 #define USE_YMAX_PLUG
-//#define USE_ZMAX_PLUG
+#define USE_ZMAX_PLUG
 //#define USE_IMAX_PLUG
 //#define USE_JMAX_PLUG
 //#define USE_KMAX_PLUG
@@ -1233,14 +1233,14 @@
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
 // E steps example: steps per revolution s=200, microstepping m=16, effective gear diameter d=10.95: sm/(πd) = 93.02
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 800, 93.02 }
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 800, 800, 800, 93.02 }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 8000, 8000, 15, 15000 }
+#define DEFAULT_MAX_FEEDRATE          { 8000, 8000, 8000, 15000 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1253,7 +1253,7 @@
  * Override with M201
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 5000, 5000, 100, 10000 }
+#define DEFAULT_MAX_ACCELERATION      { 4000, 4000, 4000, 4000 }
 
 //#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
@@ -1286,7 +1286,7 @@
  * When changing speed and direction, if the difference is less than the
  * value set here, it may happen instantaneously.
  */
-//#define CLASSIC_JERK
+#define CLASSIC_JERK
 #if ENABLED(CLASSIC_JERK)
   #define DEFAULT_XJERK 10.0
   #define DEFAULT_YJERK 10.0
@@ -1345,7 +1345,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -1755,7 +1755,7 @@
 // :[-1,1]
 #define X_HOME_DIR  1
 #define Y_HOME_DIR  1
-#define Z_HOME_DIR -1
+#define Z_HOME_DIR  1
 //#define I_HOME_DIR -1
 //#define J_HOME_DIR -1
 //#define K_HOME_DIR -1
@@ -1766,16 +1766,16 @@
 // @section geometry
 
 // The size of the printable area
-#define X_BED_SIZE 358
-#define Y_BED_SIZE 370
+#define X_BED_SIZE ((PRINTABLE_RADIUS) * 2)
+#define Y_BED_SIZE ((PRINTABLE_RADIUS) * 2)
 
 // Travel limits (linear=mm, rotational=°) after homing, corresponding to endstop positions.
-#define X_MIN_POS  8
-#define Y_MIN_POS -1
+#define X_MIN_POS -(PRINTABLE_RADIUS)
+#define Y_MIN_POS -(PRINTABLE_RADIUS)
 #define Z_MIN_POS  0
-#define X_MAX_POS  X_BED_SIZE + X_MIN_POS
-#define Y_MAX_POS  Y_BED_SIZE + Y_MIN_POS
-#define Z_MAX_POS  405        + Z_MIN_POS
+#define X_MAX_POS  PRINTABLE_RADIUS
+#define Y_MAX_POS  PRINTABLE_RADIUS
+#define Z_MAX_POS  PRINTABLE_RADIUS
 //#define I_MIN_POS 0
 //#define I_MAX_POS 50
 //#define J_MIN_POS 0
